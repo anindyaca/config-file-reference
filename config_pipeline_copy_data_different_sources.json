@@ -1,0 +1,38 @@
+[
+  {
+    "source_type": "Dataverse",
+    "source_connection_id": "61db5e13-e737-428d-bf76-be678b30418f",
+    "source_file_name": "cr1f2_vw_flag_notes",
+    "source_relative_url": "",
+    "source_query": "",
+    "destination_schema": "dbo",
+    "destination_table": "claim_flagnotes_bronze_test"
+  },
+  {
+    "source_type": "Dataverse",
+    "source_connection_id": "61db5e13-e737-428d-bf76-be678b30418f",
+    "source_file_name": "cr1f2_dv_document",
+    "source_relative_url": "",
+    "source_query": "",
+    "destination_schema": "dbo",
+    "destination_table": "dv_documents_bronze_test"
+  },
+  {
+    "source_type": "loganalytics",
+    "source_connection_id": "fa071dd1-0cf7-4247-a220-48fa7fa3a2d9",
+    "source_entity_name": "",
+    "source_relative_url": "/v1/workspaces/85a0bb10-e74b-4a7b-9082-4f3b4f855fce/query",
+    "source_query": "AppPageViews | where TimeGenerated >= ago(7h) | project TenantId, TimeGenerated, Id, Name, Url, DurationMs, PerformanceBucket, OperationName, OperationId, ClientType, ClientModel, ClientOS, ClientIP, ClientCity, ClientStateOrProvince, ClientCountryOrRegion, ClientBrowser, Properties = tostring(Properties), Properties_userName = tostring(Properties.userName), Properties_userDisplayName = tostring(Properties.userDisplayName)",
+    "destination_schema": "dbo",
+    "destination_table": "law_app_pageviews_bronze"
+  },
+  {
+    "source_type": "loganalytics",
+    "source_connection_id": "fa071dd1-0cf7-4247-a220-48fa7fa3a2d9",
+    "source_entity_name": "",
+    "source_relative_url": "/v1/workspaces/85a0bb10-e74b-4a7b-9082-4f3b4f855fce/query",
+    "source_query": "AppEvents | where TimeGenerated >= ago(7h) | extend Properties_userName = tostring(Properties.userName), Properties_userDisplayName = tostring(Properties.userDisplayName) | project TenantId, TimeGenerated, Name, Properties = tostring(Properties), Measurements = tostring(Measurements), Properties_userName, Properties_userDisplayName, OperationName, OperationId, project_TenantId, TimeGenerated, Name, Properties = tostring(Properties), Measurements = tostring(Measurements), Properties_userName, Properties_userDisplayName, OperationName, OperationId, ParentId, SyntheticSource, SessionId, UserId, UserAuthenticatedId, AppVersion, AppRoleName, AppRoleInstance, ClientType, ClientModel, ClientOS, ClientIP, ClientCity, ClientStateOrProvince, ClientCountryOrRegion, ClientBrowser, ResourceGUID, IKey, SDKVersion, ItemCount, SourceSystem, Type, _ResourceId",
+    "destination_schema": "dbo",
+    "destination_table": "law_app_events_bronze"
+  }
+]
